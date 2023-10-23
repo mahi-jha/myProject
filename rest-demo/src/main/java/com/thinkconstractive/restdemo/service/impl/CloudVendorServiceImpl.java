@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.thinkconstractive.restdemo.exception.CloudVendorNotFoundException;
 import com.thinkconstractive.restdemo.model.CloudVendor;
 import com.thinkconstractive.restdemo.repository.CloudVendorRepsitory;
 import com.thinkconstractive.restdemo.service.CloudVendorService;
@@ -40,7 +41,10 @@ public class CloudVendorServiceImpl implements CloudVendorService{
 
 	@Override
 	public CloudVendor getCloudVendor(String cloudVendorId) {
-		// TODO Auto-generated method stub
+		
+		if (cloudVendorRepsitory.findById(cloudVendorId).isEmpty()) 
+			
+		throw new CloudVendorNotFoundException("cloud vendor id not fount");
 		return cloudVendorRepsitory.findById(cloudVendorId).get();
 	}
 

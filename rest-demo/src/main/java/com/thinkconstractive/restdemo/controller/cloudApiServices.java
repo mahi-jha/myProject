@@ -2,6 +2,9 @@ package com.thinkconstractive.restdemo.controller;
 
 import java.util.List;
 
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.thinkconstractive.restdemo.model.CloudVendor;
+import com.thinkconstractive.restdemo.response.ResponseHandler;
 import com.thinkconstractive.restdemo.service.CloudVendorService;
 
 @RestController
@@ -31,10 +35,11 @@ public class cloudApiServices {
     
     //read for spacific vendorid
 	@GetMapping("{vendorId}")
-	public CloudVendor cloudVendorDetailsService(@PathVariable("vendorId") String vendorId)
+	public ResponseEntity<Object> cloudVendorDetailsService(@PathVariable("vendorId") String vendorId)
 	{
 		
-		return cloudVendorService.getCloudVendor(vendorId);
+	return ResponseHandler.responseBuilder("Requisted Vendor Details are given here",
+				HttpStatus.OK,cloudVendorService.getCloudVendor(vendorId)) ;
 				
 				
 				//new CloudVendor("c1",  "vendor1",  "address","xxxxx");
